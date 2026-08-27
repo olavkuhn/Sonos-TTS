@@ -219,3 +219,4 @@ __marimo__/
 
 # Soco-TTS
 utils/static/tts/*.mp3
+!utils/static/tts/.gitkeep
