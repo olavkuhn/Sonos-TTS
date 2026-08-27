@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
-TTS_DIR = BASE_DIR / "mp3s"
+TTS_DIR = BASE_DIR / "static" / "tts"
 
 
 class TTSGenerator:
@@ -31,7 +31,7 @@ class TTSGenerator:
             "--write-media",
             str(_full_path),
             "--voice",
-            self.voice
+            self.voice,
         ]
 
         try:
