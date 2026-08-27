@@ -25,8 +25,9 @@ def get_host_ip():
 def run_flask_server():
     app.run(host='0.0.0.0', port=24505, debug=False)
 
-async def custom_tts(input_text: str, volume: int = 50):
+async def custom_tts(input_text: str, vol: int = 0):
     speaker = SonosWebsocket(config['SONOS']['target_ip'])
+    volume = vol if vol != 0 else config['SONOS']['volume']
 
     tts = TTSGenerator()
     tts.generate_file(f"{input_text}", "t1.mp3")
