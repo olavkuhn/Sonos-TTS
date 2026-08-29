@@ -2,14 +2,14 @@
 import asyncio
 import socket
 import threading
+from pathlib import Path
 
 from sonos_websocket import SonosWebsocket  # type: ignore[import-untyped]
 
-from utils.config_reader import Config
-from utils.exceptions import CannotFindSonosDevice
-from utils.server import app
-from utils.tts import TTSGenerator
-from pathlib import Path
+from .config_reader import Config
+from .exceptions import CannotFindSonosDevice
+from .server import app
+from .tts import TTSGenerator
 
 config = Config()
 
@@ -30,6 +30,9 @@ def run_flask_server():
 
 
 async def custom_tts(input_text: str, vol: int = 0):
+
+    config._check_init_of_config()
+
     speaker = SonosWebsocket(config["SONOS"]["target_ip"])
     volume = vol if vol != 0 else config["SONOS"]["volume"]
 
@@ -61,4 +64,3 @@ async def custom_tts(input_text: str, vol: int = 0):
         print("No permission to remove TTS file")
     except OSError as err:
         print(f"Error removing TTS file: {err}")
-        

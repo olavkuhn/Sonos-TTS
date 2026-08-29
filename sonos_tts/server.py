@@ -4,7 +4,7 @@ import logging
 import click
 from flask import Flask, Response, send_from_directory
 
-from utils.config_reader import Config
+from .config_reader import Config
 
 config = Config()
 

@@ -1,7 +1,46 @@
-# SoCo-TTS
+# soco-tts 🔊
 
-SoCo-TTS is a simple TTS extension on top of the [SoCo](https://github.com/SoCo/SoCo) repository.
+A lightweight Python package and CLI tool for streaming text-to-speech directly to Sonos devices using Edge TTS.
 
-Currently, using [SoCo's](https://github.com/SoCo/SoCo) snapshot function is not stable enough to restore a session created from Spotify to Sonos due to Spotify's application.
+## Features
 
-This repository is to fix this problem, using raw sockets instead of Sonos's API features.
+- **CLI Support**: Play TTS messages directly from your terminal.
+- **Python Library**: Seamless integration into your own Python projects.
+- **Config Management**: Easily configure target IP and settings programmatically or via configuration file.
+
+## Installation
+
+Not available, still in production.
+
+## Quick Start
+
+### 1. Python Usage
+
+```python
+import sonos_tts
+
+# Update the target IP address of your Sonos speaker
+sonos_tts.config.update("SONOS", "target_ip", "192.168.4.37")
+
+# Inspect the current configuration
+sonos_tts.config.see_conf()
+
+# Play a TTS message
+sonos_tts.play("Hello, world!")
+```
+
+### 2. Command Line Interface (CLI)
+
+After installation, use the CLI directly:
+
+```bash
+sonos-tts "Hello from the terminal"
+```
+
+## Configuration
+
+The package manages default settings inside `config.toml`. You can view or update settings dynamically via Python as shown above.
+
+## License
+
+MIT License

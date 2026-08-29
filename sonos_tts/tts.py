@@ -4,7 +4,7 @@ import string
 import subprocess
 from pathlib import Path
 
-from utils.config_reader import Config
+from .config_reader import Config
 
 config = Config()
 
