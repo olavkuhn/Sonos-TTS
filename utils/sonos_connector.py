@@ -8,6 +8,7 @@ from sonos_websocket import SonosWebsocket
 
 from utils.server import app
 from utils.tts import TTSGenerator
+from utils.exceptions import CannotFindSonosDevice
 
 with open("config.toml", "rb") as f:
     config = tomllib.load(f)
@@ -39,7 +40,7 @@ async def custom_tts(input_text: str, vol: int = 0):
         m = await speaker.play_clip(uri=f"http://{get_host_ip()}:24505/tts/t1.mp3", volume=volume)
         print(m)
     except Exception as e:
-        print(f"Something went wrong playing a custom TTS: {e}")
+        raise CannotFindSonosDevice(config['SONOS']['target_ip'])
     finally:
         if hasattr(speaker, 'close'):
             await speaker.close()
