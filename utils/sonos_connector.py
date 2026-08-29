@@ -9,6 +9,7 @@ from utils.config_reader import Config
 from utils.exceptions import CannotFindSonosDevice
 from utils.server import app
 from utils.tts import TTSGenerator
+from pathlib import Path
 
 config = Config()
 
@@ -20,8 +21,8 @@ def get_host_ip():
         ip = s.getsockname()[0]
         s.close()
         return ip
-    except OSError as e:
-        return e
+    except OSError:
+        return "127.0.0.1"
 
 
 def run_flask_server():
@@ -33,14 +34,14 @@ async def custom_tts(input_text: str, vol: int = 0):
     volume = vol if vol != 0 else config["SONOS"]["volume"]
 
     tts = TTSGenerator()
-    tts.generate_file(f"{input_text}", "t1.mp3")
+    tts.generate_file(f"{input_text}", "c_tts.mp3")
 
     t = threading.Thread(target=run_flask_server, daemon=True)
     t.start()
 
     try:
         await speaker.play_clip(
-            uri=f"http://{get_host_ip()}:24505/tts/t1.mp3", volume=volume
+            uri=f"http://{get_host_ip()}:24505/tts/c_tts.mp3", volume=volume
         )
     except Exception as err:
         raise CannotFindSonosDevice(config["SONOS"]["target_ip"]) from err
@@ -51,3 +52,13 @@ async def custom_tts(input_text: str, vol: int = 0):
             await speaker.session.close()
 
     await asyncio.sleep(1)
+
+    tts_path = Path("utils/static/tts/c_tts.mp3")
+
+    try:
+        tts_path.unlink(missing_ok=True)
+    except PermissionError:
+        print("No permission to remove TTS file")
+    except OSError as err:
+        print(f"Error removing TTS file: {err}")
+        

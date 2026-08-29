@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soco-tts"
+version = "0.1.0"
+authors = [
+  { name="Jouw Naam", email="jouw.email@example.com" },
+]
+description = "Een simpele TTS connector voor Sonos apparaten."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "sonos-websocket",
+    "flask",
+    "click"
+]
+
+# (Optioneel) Als je wilt dat mensen dit via het commando 'soco-tts' in hun terminal kunnen starten:
+[project.scripts]
+soco-tts = "soco_tts.main:cli"

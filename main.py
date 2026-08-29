@@ -8,4 +8,4 @@ def play(text):
     asyncio.run(custom_tts(text))
 
 
-play("hello world! how are you doing today!")
+play("hello world! 12345, but how, if i think, how i think is cool")

@@ -4,6 +4,7 @@ volume = 50
 
 [TTS]
 voice = "en-US-AndrewMultilingualNeural"
+delete_tts_after = true
 
 [DEBUG]
 flask_output = false
