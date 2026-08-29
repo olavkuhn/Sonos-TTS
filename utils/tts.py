@@ -1,15 +1,20 @@
+#!/usr/bin/env python3
 import random
 import string
 import subprocess
 from pathlib import Path
+
+from utils.config_reader import Config
+
+config = Config()
 
 BASE_DIR = Path(__file__).parent
 TTS_DIR = BASE_DIR / "static" / "tts"
 
 
 class TTSGenerator:
-    def __init__(self, voice: str = "en-GB-RyanNeural"):
-        self.voice = voice
+    def __init__(self):
+        self.voice = config["TTS"]["voice"]
         TTS_DIR.mkdir(parents=True, exist_ok=True)
 
     def _generate_file_identifier(self, lenght: int = 8):

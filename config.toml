@@ -1,3 +1,9 @@
 [SONOS]
 target_ip = "192.168.4.37"
-volume = 20
+volume = 50
+
+[TTS]
+voice = "en-US-AndrewMultilingualNeural"
+
+[DEBUG]
+flask_output = false

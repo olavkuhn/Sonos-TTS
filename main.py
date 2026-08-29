@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import asyncio
 
 from utils.sonos_connector import custom_tts
