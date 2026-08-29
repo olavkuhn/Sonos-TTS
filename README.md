@@ -1,4 +1,4 @@
-# soco-tts 🔊
+# Sonos-TTS
 
 A lightweight Python package and CLI tool for streaming text-to-speech directly to Sonos devices using Edge TTS.
 
