@@ -1,6 +1,9 @@
 import unittest
 from pathlib import Path
 from sonos_tts.tts import TTSGenerator, TTS_DIR
+from sonos_tts.exceptions import InvalidEdgeTTSVoice
+
+ttsg = TTSGenerator()
 
 class TestTTSGenerator(unittest.TestCase):
     def test_generate_tts_file(self):
@@ -11,7 +14,6 @@ class TestTTSGenerator(unittest.TestCase):
         _filename = "testfile.mp3"
         _desired_file_path = TTS_DIR / _filename
 
-        ttsg = TTSGenerator()
         result = ttsg.generate_file("Hello world", _filename)
 
         try:
@@ -20,6 +22,14 @@ class TestTTSGenerator(unittest.TestCase):
         finally:
             if _desired_file_path.exists():
                 _desired_file_path.unlink()
+
+    def test_file_identifier_lenght(self):
+        identifier = ttsg._generate_file_identifier()
+        self.assertEqual(len(identifier), 8)
+
+    def test_file_identifier_lowercase(self):
+        identifier = ttsg._generate_file_identifier()
+        self.assertTrue(identifier.islower())
 
 
 if __name__ == "__main__":
